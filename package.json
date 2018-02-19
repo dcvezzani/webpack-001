@@ -16,8 +16,11 @@
     "webpack": "^3.11.0",
     "webpack-dashboard": "^1.1.1",
     "webpack-dev-server": "^2.11.1"
-  }, 
+  },
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --inline --progress"
+  },
+  "dependencies": {
+    "bulma": "^0.6.2"
   }
 }
