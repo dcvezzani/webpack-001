@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 require('dotenv').config()
 
 const extractSass = new ExtractTextPlugin({
@@ -61,6 +62,7 @@ module.exports = {
 			new webpack.DefinePlugin({  // plugin to define global constants
 				API_KEY: JSON.stringify(process.env.API_KEY)
 			}), 
+			new DashboardPlugin(), 
   ],
   devServer: {  // configuration for webpack-dev-server
       contentBase: './src/public',  //source of static assets
