@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 require('dotenv').config()
 
 module.exports = (env) => {
@@ -78,6 +80,18 @@ module.exports = (env) => {
 		} 
 	};
 
+	// Minify and copy assets in production
+	if(isProd) {  // plugins to use in a production environment
+			config.plugins.push(
+					new UglifyJSPlugin({
+						sourceMap: true, 
+					}),  // minify the chunk
+					new CopyWebpackPlugin([{  // copy assets to public folder
+						from: __dirname + '/src/public'
+					}])
+			);
+	};
+	
 	return config;
 };
 
