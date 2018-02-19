@@ -16,6 +16,11 @@ module.exports = {
               /node_modules/
             ]
           }, 
+          {
+              test: /\.html/,
+              loader: 'raw-loader'
+          },
+				
       ]
   },
   plugins: [  // Array of plugins to apply to build chunk

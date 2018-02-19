@@ -7,3 +7,6 @@ class TestClass {
 
 let test = new TestClass();
 
+import template from '../public/index.template.html';
+console.log("template: " + template);
+
