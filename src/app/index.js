@@ -13,3 +13,5 @@ let test = new TestClass();
 import template from '../public/index.template.html';
 console.log("template: " + template);
 
+console.log("API Key from Define Plugin: " + API_KEY);
+

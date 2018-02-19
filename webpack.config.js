@@ -1,5 +1,7 @@
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+require('dotenv').config()
 
 const extractSass = new ExtractTextPlugin({
 		filename: "styles.css",
@@ -56,6 +58,9 @@ module.exports = {
           inject: 'body'
       }), 
 			extractSass, // extract css to a separate file called styles.css
+			new webpack.DefinePlugin({  // plugin to define global constants
+				API_KEY: JSON.stringify(process.env.API_KEY)
+			}), 
   ],
   devServer: {  // configuration for webpack-dev-server
       contentBase: './src/public',  //source of static assets
