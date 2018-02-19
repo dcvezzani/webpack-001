@@ -21,7 +21,7 @@ module.exports = {
               loader: 'raw-loader'
           },
           {
-            test: /\.(sass|scss)$/,
+            test: /\.(sass|scss|css)$/,
             use: [{
                 loader: "style-loader" // creates style nodes from JS strings
             }, {
