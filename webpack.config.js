@@ -1,4 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin({
+		filename: "styles.css",
+		allChunks: true,
+});
 
 module.exports = {
   entry: __dirname + "/src/app/index.js", // webpack entry point. Module to start building dependency graph
@@ -21,7 +27,7 @@ module.exports = {
               loader: 'raw-loader'
           },
           {
-            test: /\.(sass|scss|css)$/,
+            test: /\.(sass|scss)$/,
             use: [{
                 loader: "style-loader" // creates style nodes from JS strings
             }, {
@@ -30,14 +36,26 @@ module.exports = {
                 loader: "sass-loader" // compiles Sass to CSS
             }]
           }, 
-				
+					{
+						test: /\.s?css$/,
+						use: extractSass.extract({
+								use: [{
+										loader: "css-loader"
+								}, {
+										loader: "sass-loader"
+								}],
+								// use style-loader in development 
+								fallback: "style-loader"
+						})
+					},
       ]
   },
   plugins: [  // Array of plugins to apply to build chunk
       new HtmlWebpackPlugin({
           template: __dirname + "/src/public/index.html",
           inject: 'body'
-      })
+      }), 
+			extractSass, // extract css to a separate file called styles.css
   ],
   devServer: {  // configuration for webpack-dev-server
       contentBase: './src/public',  //source of static assets
